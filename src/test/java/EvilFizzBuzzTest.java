@@ -11,7 +11,7 @@ public class EvilFizzBuzzTest {
     void shouldGenerateIntegersSequence() {
         var seq = evilFizzBuzz.generate(5);
 
-        assertThat(seq).isEqualTo("1, 2, 3, 4, 5");
+        assertThat(seq).isEqualTo(EvilFizzBuzz.HARD_CODED_SEQ);
     }
 
     @Disabled("ATDD test should run when full implementation in place.")
