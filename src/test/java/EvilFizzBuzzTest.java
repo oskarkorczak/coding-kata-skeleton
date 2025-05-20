@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,6 +14,18 @@ public class EvilFizzBuzzTest {
         var seq = evilFizzBuzz.generate(7);
 
         assertThat(seq).isEqualTo("1, 2, Fizz, 4, 5, Fizz, 7");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { -6, -3, 0, 3, 6 })
+    void shouldDetectIntegersDivisibleBy3(int value) {
+        assertThat(EvilFizzBuzz.isDivisibleBy3Predicate.test(value)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { -2, -1, 1, 4, 7 })
+    void shouldNotDetectIntegersDivisibleBy3(int value) {
+        assertThat(EvilFizzBuzz.isDivisibleBy3Predicate.test(value)).isFalse();
     }
 
     @Disabled("ATDD test should run when full implementation in place.")
