@@ -1,8 +1,19 @@
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.joining;
+
 public class EvilFizzBuzz {
 
-    static final String HARD_CODED_SEQ = "1, 2, 3, 4, 5";
-
     public String generate(int limit) {
-        return HARD_CODED_SEQ;
+        return IntStream
+                .rangeClosed(1, limit)
+                .boxed()
+                .map( i -> {
+                    if (i % 3 == 0) {
+                        return "Fizz";
+                    }
+                    return String.valueOf(i);
+                })
+                .collect(joining(", "));
     }
 }
