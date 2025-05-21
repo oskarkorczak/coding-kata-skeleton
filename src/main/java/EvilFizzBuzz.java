@@ -12,14 +12,10 @@ public class EvilFizzBuzz {
         return IntStream
                 .rangeClosed(1, limit)
                 .boxed()
-                .map( i -> {
-                    if (isDivisibleBy3Predicate.test(i)) {
-                        return "Fizz";
-                    }
-                    if (isDivisibleBy5Predicate.test(i)) {
-                        return "Buzz";
-                    }
-                    return String.valueOf(i);
+                .map( n -> switch (n) {
+                    case Integer i when isDivisibleBy3Predicate.test(i) -> "Fizz";
+                    case Integer i when isDivisibleBy5Predicate.test(i) -> "Buzz";
+                    default -> String.valueOf(n);
                 })
                 .collect(joining(", "));
     }
