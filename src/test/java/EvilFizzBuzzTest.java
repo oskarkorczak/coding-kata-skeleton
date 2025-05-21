@@ -10,10 +10,10 @@ public class EvilFizzBuzzTest {
     private final EvilFizzBuzz evilFizzBuzz = new EvilFizzBuzz();
 
     @Test
-    void generatesCorrectInitialSequence() {
+    void generatesCorrectSequence() {
         var seq = evilFizzBuzz.generate(15);
 
-        assertThat(seq).isEqualTo("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz");
+        assertThat(seq).isEqualTo("1, Wizz, FizzWizz, 4, BuzzWizz, Fizz, Wizz, 8, Fizz, Buzz, Wizz, Fizz, Wizz, 14, FizzBuzz");
     }
 
     @ParameterizedTest
@@ -62,13 +62,5 @@ public class EvilFizzBuzzTest {
     @ValueSource(ints = {-31, -27, 1, 13, 17, 31})
     void shouldNotDetectIntegersDivisibleBy15(int value) {
         assertThat(EvilFizzBuzz.isDivisibleBy15Predicate.test(value)).isFalse();
-    }
-
-    @Disabled("ATDD test should run when full implementation in place.")
-    @Test
-    void shouldGenerateCorrectInitialSequence() {
-        var seq = evilFizzBuzz.generate(15);
-
-        assertThat(seq).isEqualTo("1, Wizz, FizzWizz, 4, BuzzWizz, Fizz, Wizz, 8, Fizz, Buzz, Wizz, Fizz, Wizz, 14, FizzBuzz");
     }
 }
