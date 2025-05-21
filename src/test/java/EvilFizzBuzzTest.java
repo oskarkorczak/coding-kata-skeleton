@@ -11,9 +11,9 @@ public class EvilFizzBuzzTest {
 
     @Test
     void generatesCorrectInitialSequence() {
-        var seq = evilFizzBuzz.generate(11);
+        var seq = evilFizzBuzz.generate(15);
 
-        assertThat(seq).isEqualTo("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11");
+        assertThat(seq).isEqualTo("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz");
     }
 
     @ParameterizedTest
