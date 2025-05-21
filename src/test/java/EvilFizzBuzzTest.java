@@ -11,7 +11,7 @@ public class EvilFizzBuzzTest {
 
     @Test
     void generatesCorrectInitialSequence() {
-        var seq = evilFizzBuzz.generate(7);
+        var seq = evilFizzBuzz.generate(11);
 
         assertThat(seq).isEqualTo("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11");
     }
@@ -26,6 +26,18 @@ public class EvilFizzBuzzTest {
     @ValueSource(ints = { -2, -1, 1, 4, 7 })
     void shouldNotDetectIntegersDivisibleBy3(int value) {
         assertThat(EvilFizzBuzz.isDivisibleBy3Predicate.test(value)).isFalse();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { -10, -5, 0, 5, 10 })
+    void shouldDetectIntegersDivisibleBy5(int value) {
+        assertThat(EvilFizzBuzz.isDivisibleBy5Predicate.test(value)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { -11, -7, 1, 3, 7 })
+    void shouldNotDetectIntegersDivisibleBy5(int value) {
+        assertThat(EvilFizzBuzz.isDivisibleBy5Predicate.test(value)).isFalse();
     }
 
     @Disabled("ATDD test should run when full implementation in place.")
