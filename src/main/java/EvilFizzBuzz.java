@@ -10,7 +10,9 @@ public class EvilFizzBuzz {
     static final Predicate<Integer> isDivisibleBy15Predicate = i -> isDivisibleBy3Predicate.test(i) && isDivisibleBy5Predicate.test(i);
 
     static final Predicate<Integer> isPrime = i -> {
-        return false;
+        return i > 1 && IntStream
+                .rangeClosed(2, (int) Math.floor(Math.sqrt(i)))
+                .noneMatch(n -> i % n == 0);
     };
 
     public String generate(int limit) {
