@@ -17,6 +17,18 @@ public class EvilFizzBuzzTest {
     }
 
     @ParameterizedTest
+    @ValueSource(ints = {2, 3, 5, 7, 11, 13, 17, 23, 31})
+    void detectsPrimeNumbers(int value) {
+        assertThat(EvilFizzBuzz.isPrime.test(value)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-7, -1, 0, 1, 4, 6, 8, 9, 10, 20, 55, 100})
+    void doNotdetectPrimeNumbers(int value) {
+        assertThat(EvilFizzBuzz.isPrime.test(value)).isFalse();
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {-6, -3, 0, 3, 6})
     void shouldDetectIntegersDivisibleBy3(int value) {
         assertThat(EvilFizzBuzz.isDivisibleBy3Predicate.test(value)).isTrue();
