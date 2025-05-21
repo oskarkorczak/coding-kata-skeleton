@@ -10,10 +10,10 @@ public class EvilFizzBuzzTest {
     private final EvilFizzBuzz evilFizzBuzz = new EvilFizzBuzz();
 
     @Test
-    void shouldDetectIntegersDivisibleBy3() {
+    void generatesCorrectInitialSequence() {
         var seq = evilFizzBuzz.generate(7);
 
-        assertThat(seq).isEqualTo("1, 2, Fizz, 4, 5, Fizz, 7");
+        assertThat(seq).isEqualTo("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11");
     }
 
     @ParameterizedTest
