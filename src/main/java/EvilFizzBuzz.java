@@ -27,7 +27,7 @@ public class EvilFizzBuzz {
     static final Predicate<Integer> isDivisibleBy5 = i -> i % 5 == 0;
     static final Predicate<Integer> isDivisibleBy15 = i -> isDivisibleBy3.test(i) && isDivisibleBy5.test(i);
     static final IntPredicate isPrime = value -> value > 1 && IntStream
-            .rangeClosed(2, (int) floor(sqrt(value)))
+            .rangeClosed(2, (int) sqrt(value))
             .noneMatch(divisor -> value % divisor == 0);
     static final BiFunction<Integer, String, String> toLabel = (Integer value, String label) -> IntStream
             .of(value)
