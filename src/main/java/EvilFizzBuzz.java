@@ -12,7 +12,7 @@ public class EvilFizzBuzz {
                 .rangeClosed(1, limit)
                 .boxed()
                 .map(n -> switch (n) {
-                    case Integer i when isDivisibleBy15.test(i) -> toLabel(i, "FizzBuzz");
+                    case Integer i when isDivisibleBy15.test(i) -> "FizzBuzz";
                     case Integer i when isDivisibleBy3.test(i) -> toLabel(i, "Fizz");
                     case Integer i when isDivisibleBy5.test(i) -> toLabel(i, "Buzz");
                     case Integer i when isPrime.test(i) -> "Wizz";
