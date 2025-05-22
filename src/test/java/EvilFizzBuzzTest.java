@@ -4,6 +4,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -74,7 +75,7 @@ public class EvilFizzBuzzTest {
 
     @ParameterizedTest
     @MethodSource("primeNumbersProvider")
-    void detectsPrimeNumbers(Integer number, Predicate<Integer> predicate, boolean expected) {
+    void detectsPrimeNumbers(Integer number, IntPredicate predicate, boolean expected) {
         assertThat(predicate.test(number)).isEqualTo(expected);
     }
 
