@@ -1,27 +1,25 @@
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
-import static java.lang.Math.floor;
 import static java.lang.Math.sqrt;
 import static java.util.stream.Collectors.joining;
 
 public class EvilFizzBuzz {
 
-    public String generate(int limit) {
-        return IntStream
+    public static final Function<Integer, String> generate = limit -> IntStream
                 .rangeClosed(1, limit)
                 .boxed()
                 .map(n -> switch (n) {
-                    case Integer i when isDivisibleBy15.test(i) -> "FizzBuzz";
-                    case Integer i when isDivisibleBy3.test(i) -> toLabel.apply(i, "Fizz");
-                    case Integer i when isDivisibleBy5.test(i) -> toLabel.apply(i, "Buzz");
-                    case Integer i when isPrime.test(i) -> "Wizz";
+                    case Integer i when EvilFizzBuzz.isDivisibleBy15.test(i) -> "FizzBuzz";
+                    case Integer i when EvilFizzBuzz.isDivisibleBy3.test(i) -> EvilFizzBuzz.toLabel.apply(i, "Fizz");
+                    case Integer i when EvilFizzBuzz.isDivisibleBy5.test(i) -> EvilFizzBuzz.toLabel.apply(i, "Buzz");
+                    case Integer i when EvilFizzBuzz.isPrime.test(i) -> "Wizz";
                     default -> String.valueOf(n);
                 })
                 .collect(joining(", "));
-    }
 
     static final Predicate<Integer> isDivisibleBy3 = i -> i % 3 == 0;
     static final Predicate<Integer> isDivisibleBy5 = i -> i % 5 == 0;

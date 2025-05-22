@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
@@ -16,7 +15,7 @@ public class EvilFizzBuzzTest {
 
     @Test
     void generatesCorrectSequence() {
-        var seq = evilFizzBuzz.generate(15);
+        var seq = EvilFizzBuzz.generate.apply(15);
 
         assertThat(seq).isEqualTo("1, Wizz, FizzWizz, 4, BuzzWizz, Fizz, Wizz, 8, Fizz, Buzz, Wizz, Fizz, Wizz, 14, FizzBuzz");
     }
