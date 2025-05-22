@@ -1,6 +1,11 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,6 +21,58 @@ public class EvilFizzBuzzTest {
     }
 
     @ParameterizedTest
+    @MethodSource("divisibilityDetectionProvider")
+    void divisibilityDetection(Integer value, Predicate<Integer> predicate, boolean expected) {
+        assertThat(predicate.test(value)).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> divisibilityDetectionProvider() {
+        return Stream.of(
+                Arguments.of(-9, EvilFizzBuzz.isDivisibleBy3, true),
+                Arguments.of(-3, EvilFizzBuzz.isDivisibleBy3, true),
+                Arguments.of(0, EvilFizzBuzz.isDivisibleBy3, true),
+                Arguments.of(3, EvilFizzBuzz.isDivisibleBy3, true),
+                Arguments.of(6, EvilFizzBuzz.isDivisibleBy3, true),
+                Arguments.of(15, EvilFizzBuzz.isDivisibleBy3, true),
+
+                Arguments.of(-8, EvilFizzBuzz.isDivisibleBy3, false),
+                Arguments.of(-2, EvilFizzBuzz.isDivisibleBy3, false),
+                Arguments.of(1, EvilFizzBuzz.isDivisibleBy3, false),
+                Arguments.of(4, EvilFizzBuzz.isDivisibleBy3, false),
+                Arguments.of(7, EvilFizzBuzz.isDivisibleBy3, false),
+                Arguments.of(11, EvilFizzBuzz.isDivisibleBy3, false),
+
+                Arguments.of(-15, EvilFizzBuzz.isDivisibleBy5, true),
+                Arguments.of(-5, EvilFizzBuzz.isDivisibleBy5, true),
+                Arguments.of(0, EvilFizzBuzz.isDivisibleBy5, true),
+                Arguments.of(5, EvilFizzBuzz.isDivisibleBy5, true),
+                Arguments.of(10, EvilFizzBuzz.isDivisibleBy5, true),
+                Arguments.of(25, EvilFizzBuzz.isDivisibleBy5, true),
+
+                Arguments.of(-14, EvilFizzBuzz.isDivisibleBy5, false),
+                Arguments.of(-3, EvilFizzBuzz.isDivisibleBy5, false),
+                Arguments.of(-1, EvilFizzBuzz.isDivisibleBy5, false),
+                Arguments.of(3, EvilFizzBuzz.isDivisibleBy5, false),
+                Arguments.of(8, EvilFizzBuzz.isDivisibleBy5, false),
+                Arguments.of(16, EvilFizzBuzz.isDivisibleBy5, false),
+
+                Arguments.of(-45, EvilFizzBuzz.isDivisibleBy15, true),
+                Arguments.of(-15, EvilFizzBuzz.isDivisibleBy15, true),
+                Arguments.of(0, EvilFizzBuzz.isDivisibleBy15, true),
+                Arguments.of(15, EvilFizzBuzz.isDivisibleBy15, true),
+                Arguments.of(15, EvilFizzBuzz.isDivisibleBy15, true),
+                Arguments.of(60, EvilFizzBuzz.isDivisibleBy15, true),
+
+                Arguments.of(-17, EvilFizzBuzz.isDivisibleBy15, false),
+                Arguments.of(-9, EvilFizzBuzz.isDivisibleBy15, false),
+                Arguments.of(-5, EvilFizzBuzz.isDivisibleBy15, false),
+                Arguments.of(3, EvilFizzBuzz.isDivisibleBy15, false),
+                Arguments.of(10, EvilFizzBuzz.isDivisibleBy15, false),
+                Arguments.of(16, EvilFizzBuzz.isDivisibleBy15, false)
+        );
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {2, 3, 5, 7, 11, 13, 17, 23, 31})
     void detectsPrimeNumbers(int value) {
         assertThat(EvilFizzBuzz.isPrime.test(value)).isTrue();
@@ -25,41 +82,5 @@ public class EvilFizzBuzzTest {
     @ValueSource(ints = {-7, -1, 0, 1, 4, 6, 8, 9, 10, 20, 55, 100})
     void doNotdetectPrimeNumbers(int value) {
         assertThat(EvilFizzBuzz.isPrime.test(value)).isFalse();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-6, -3, 0, 3, 6})
-    void shouldDetectIntegersDivisibleBy3(int value) {
-        assertThat(EvilFizzBuzz.isDivisibleBy3.test(value)).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-2, -1, 1, 4, 7})
-    void shouldNotDetectIntegersDivisibleBy3(int value) {
-        assertThat(EvilFizzBuzz.isDivisibleBy3.test(value)).isFalse();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-10, -5, 0, 5, 10})
-    void shouldDetectIntegersDivisibleBy5(int value) {
-        assertThat(EvilFizzBuzz.isDivisibleBy5.test(value)).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-11, -7, 1, 3, 7})
-    void shouldNotDetectIntegersDivisibleBy5(int value) {
-        assertThat(EvilFizzBuzz.isDivisibleBy5.test(value)).isFalse();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-30, -15, 0, 15, 30})
-    void shouldDetectIntegersDivisibleBy15(int value) {
-        assertThat(EvilFizzBuzz.isDivisibleBy15.test(value)).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-31, -27, 1, 13, 17, 31})
-    void shouldNotDetectIntegersDivisibleBy15(int value) {
-        assertThat(EvilFizzBuzz.isDivisibleBy15.test(value)).isFalse();
     }
 }
